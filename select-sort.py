@@ -1,5 +1,6 @@
 # Array, ktory chceme zoradit pomocou Selection Sort
 sample_array = [32, 1, 156, 4, 81, 52, 100]
+print("Vstupny zoznam: ", sample_array)
 
 for index in range(len(sample_array)-1):
     # Zvoli sa prvok v zozname a prvok po nom, ktory sa porovnava so zvyskom array v dalsom cykle
@@ -20,4 +21,4 @@ for index in range(len(sample_array)-1):
         sample_array[lowest_number_id] = selected_number
 
 # Zoradeny array
-print(sample_array)
+print("Zoradeny zoznam: ", sample_array)
