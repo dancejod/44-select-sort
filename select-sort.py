@@ -1,4 +1,4 @@
-array = [36,51,11,2,72,16,100]
+array = [1,26,23,78,54,3,99]
 
 for item in range(len(array)-1):
     selected_number = array[item]
@@ -15,8 +15,5 @@ for item in range(len(array)-1):
         lowest_number, selected_number == selected_number, lowest_number
         array[item] = lowest_number
         array[lowest_number_id] = selected_number
-
-
-    
 
 print(array)
