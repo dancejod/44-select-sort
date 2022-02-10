@@ -2,6 +2,8 @@ import csv
 
 # An empty list for numbers in the input file
 sample_array = []
+
+# Set the name of the input and output file. This is the default setting.
 infilename = "random_numbers.csv"
 outfilename = "sorted_numbers.csv"
 
