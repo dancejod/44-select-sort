@@ -1,44 +1,48 @@
 import csv
 
-# Prazdny zoznam, do ktoreho sa zo vstupu zavolaju cisla
+# An empty list for numbers in the input file
 sample_array = []
+infilename = "random_numbers.csv"
+outfilename = "sorted_numbers.csv"
 
-# Overovanie vstupu
+# Input file validation
 try:
-    with open("random_numbers.csv", encoding="utf-8", newline = "") as input:
+    with open(infilename, encoding="utf-8", newline = "") as input:
         for row in csv.reader(input):
             sample_array.append(float(row[0]))
 
 except IOError:
-    print("Subor neexistuje. Skontrolujte jeho nazov a umiestnenie a spustite skript znova.")
+    print(f"File {infilename} does not exist. Check if the file is in the same directory as the script.")
     raise
 
 except ValueError:
-    print("V subore sa nachadzaju nepovolene znaky. Opravte subor a spustite skript znova.")
+    print("File contains invalid (nonnumerical) characters. Repair the file and run the script again.")
     raise
 
 except IndexError:
-    print("V subore je chybajuci riadok. Opravte chybu a spustite skript znova.")
+    print("File contains empty lines. Repair the file and run the script again.")
     raise
 
 except:
-    print("Nieco sa pokazilo, program sa teraz ukonci.")
+    print("Something went wrong, the script will now terminate.")
     raise
 
-# Vypisanie vstupneho zoznamu
-print("Vstupny zoznam cisel: ", sample_array)
+# Print the list of input file numbers 
+print("Input list: ", sample_array)
 
-# Selection sort algoritmus
+# Selection sort algorithm
 for index in range(len(sample_array)-1):
     
-    # Zvoli sa prvok v zozname a prvok po nom, ktory sa porovnava so zvyskom array v dalsom cykle
+    # Select the first element and scan the whole list sequentially,
+    # store value and index of the next element
     selected_number = sample_array[index]
     lowest_number = sample_array[index+1]
     lowest_number_id = index+1     
 
     for number in range(index+1,len(sample_array)):
         
-        # Postupne zmensovanie rozsahu zoznamu, hladanie najmensieho cisla v zvysku zoznamu
+        # Scan each element that goes after currently selected element,
+        # compare them and find and store the lowest value and its index
         compared_number = sample_array[number]
         if lowest_number > compared_number:
             lowest_number = compared_number
@@ -46,16 +50,17 @@ for index in range(len(sample_array)-1):
         
     if lowest_number < selected_number:
         
-        # Prehodenie najmensieho cisla s prave zvolenym cislom v zozname podla indexov
+        # Swap the lowest value with currently selected element,
+        # then start over by selecting the next unsorted element
         sample_array[index] = lowest_number
         sample_array[lowest_number_id] = selected_number
 
-# Vypisanie zoradeneho zoznamu do noveho suboru
-with open("sorted_numbers.csv", "w",encoding="utf-8",  newline = "") as output:
+# Export the sorted list to a new file
+with open(outfilename, "w",encoding="utf-8",  newline = "") as output:
     writer = csv.writer(output)
     for sorted_number in sample_array:
         writer.writerow([sorted_number])
 
-# Vypisanie zoradeneho zoznamu
-print("Zoradeny zoznam cisel: ", sample_array)
-print(f"Zoradeny zoznam bol vyexportovany do noveho suboru.")
+# Print the sorted list
+print("\nSorted list: ", sample_array)
+print(f"\nThe sorted list has been exported to a new file: {outfilename}" )
